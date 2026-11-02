@@ -1,85 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>vMPK Wrocław – Rekrutacja</title>
-<style>
-  body { font-family: Arial, sans-serif; background:#0f1115; color:#eee;
-         display:flex; justify-content:center; padding:2rem; }
-  .card { background:#1e232b; max-width:480px; width:100%;
-          border-radius:12px; padding:2rem; box-shadow:0 4px 20px rgba(0,0,0,.4); }
-  h1 { font-size:1.4rem; margin-top:0; }
-  label { display:block; margin:1rem 0 .3rem; font-size:.9rem; }
-  input, select, textarea { width:100%; padding:.6rem; border-radius:6px;
-         border:1px solid #3a4150; background:#12151b; color:#eee; box-sizing:border-box; }
-  textarea { resize:vertical; min-height:80px; }
-  button { margin-top:1.2rem; width:100%; padding:.7rem; border:none;
-           border-radius:8px; background:#5865f2; color:#fff; font-size:1rem;
-           cursor:pointer; }
-  button:hover { background:#4752c4; }
-  .ok { color:#4ade80; margin-top:1rem; display:none; }
-</style>
+  <meta charset="UTF-8">
+  <title>Rekrutacja vMPK Wrocław</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+    h1 { color: #1a7f37; text-align: center; }
+    .form-box { background: white; padding: 20px; border-radius: 10px; }
+    iframe { width: 100%; height: 800px; border: none; }
+  </style>
 </head>
 <body>
-  <div class="card">
-    <h1>🚌 vMPK Wrocław – Podanie o pracę</h1>
-    <p>Stanowisko: <strong>Kierowca autobusu</strong></p>
-
-    <form id="form">
-      <label>Imię i nick Discord</label>
-      <input name="nick" required placeholder="np. Jan / jan123">
-
-      <label>Wiek</label>
-      <input name="wiek" type="number" min="13" max="99" required>
-
-      <label>Prawo jazdy (kategoria)</label>
-      <select name="prawo" required>
-        <option value="">-- wybierz --</option>
-        <option>B</option><option>B+E</option><option>C</option>
-        <option>D</option><option>D+E</option><option>Nie mam</option>
-      </select>
-
-      <label>Doświadczenie jako kierowca</label>
-      <select name="dosw" required>
-        <option value="">-- wybierz --</option>
-        <option>Brak</option><option>Poniżej roku</option>
-        <option>1–3 lata</option><option>Ponad 3 lata</option>
-      </select>
-
-      <label>Wiadomość (opcjonalnie)</label>
-      <textarea name="msg" placeholder="Np. dlaczego chcesz do nas dołączyć..."></textarea>
-
-      <button type="submit">Wyślij podanie</button>
-      <p class="ok" id="ok">✅ Podanie wysłane! Czekaj na kontakt na Discordzie.</p>
-    </form>
+  <h1>Rekrutacja vMPK Wrocław</h1>
+  <div class="form-box">
+    <iframe src=https://docs.google.com/forms/d/e/1FAIpQLSf-HJknUVBE4A5GVr-mQslDaFAPKh5ZET38-q6D6ZAJZqyEOg/viewform?usp=dialog></iframe>
   </div>
-
-<script>
-  // Zmień adres na swój webhook Discord (Kanał -> Ustawienia -> Zintegruj -> Webhooki)
-  const WEBHOOK_URL = "TUTAJ_WKLEJ_ADRES_WEBHOOKA";
-
-  document.getElementById('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const f = e.target;
-    const body = {
-      username: "vMPK Wrocław",
-      embeds: [{
-        title: "Nowe podanie – kierowca autobusu",
-        color: 0x5865f2,
-        fields: [
-          { name: "Nick", value: f.nick.value, inline: true },
-          { name: "Wiek", value: f.wiek.value, inline: true },
-          { name: "Prawo jazdy", value: f.prawo.value, inline: true },
-          { name: "Doświadczenie", value: f.dosw.value, inline: true },
-          { name: "Wiadomość", value: f.msg.value || "-" }
-        ]
-      }]
-    };
-    await fetch(WEBHOOK_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body) });
-    document.getElementById('ok').style.display = "block";
-    f.reset();
-  });
-</script>
 </body>
-</html>   
+</html>
